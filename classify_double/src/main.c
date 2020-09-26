@@ -15,7 +15,10 @@ uint64_t convertToUint64 (double number) {
 }
 
 bool getBit (const uint64_t number, const uint8_t index) {
-    /// Your code here...
+    uint32_t mask = 1 << index;
+    uint32_t temp = mask & number;
+    temp >>= index;
+    return temp;
 }
 
 
@@ -24,7 +27,7 @@ bool getBit (const uint64_t number, const uint8_t index) {
  */
 
 bool checkForPlusZero (uint64_t number) {
-    /// Your code here.
+    return number == 0x0000000000000000;
 }
 
 bool checkForMinusZero (uint64_t number) {
@@ -32,35 +35,35 @@ bool checkForMinusZero (uint64_t number) {
 }
 
 bool checkForPlusInf (uint64_t number) {
-    /// Your code here.
+    return number == 0x7ff0000000000000;
 }
 
 bool checkForMinusInf (uint64_t number) {
-    /// Your code here.
+    return number == 0xfff0000000000000;
 }
 
 bool checkForPlusNormal (uint64_t number) {
-    /// Your code here.
+    return number >= 0x10000000000000 && number <= 0x7fefffffffffffff;
 }
 
 bool checkForMinusNormal (uint64_t number) {
-    /// Your code here.
+    return number >= 0x8010000000000000 && number <= 0xffefffffffffffff;
 }
 
 bool checkForPlusDenormal (uint64_t number) {
-    /// Your code here.
+    return number >= 0x1 && number <= 0xfffffffffffff;
 }
 
 bool checkForMinusDenormal (uint64_t number) {
-    /// Your code here.
+    return number >= 0x8000000000000001 && number <= 0x800fffffffffffff;
 }
 
 bool checkForSignalingNan (uint64_t number) {
-    /// Your code here.
+    return number >= 0x7ff0000000000001 && number <= 0x7ff7ffffffffffff || number >= 0xfff0000000000001 && number <= 0xfff7ffffffffffff;
 }
 
 bool checkForQuietNan (uint64_t number) {
-    /// Your code here.
+    return number >= 0x7ff8000000000000 && number <= 0x7fffffffffffffff || number >= 0xfff8000000000000;
 }
 
 
